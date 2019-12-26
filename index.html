@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Memory Game</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.css" />
+    <style>
+        @font-face{
+            font-family: 'roman';
+            src: url('assets/roman.ttf');
+        }
+        @media screen and (min-width: 601px) {
+            h1{
+                font-size: 6.5em;
+            }
+        }
+        @media screen and (max-width: 600px) {
+            h1{
+                font-size: 3.6em;
+            }
+        }
+        body{
+            text-align: center;
+            color: blanchedalmond;
+            background-image: linear-gradient(to right, #434343 0%, black 100%);
+            height: 810px;
+        }
+        h1{
+            font-family: 'roman';
+        }
+
+        button{
+            min-height: 60px;
+            background: #22c1c3;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to right, #fdbb2d, #22c1c3);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to right, #fdbb2d, #22c1c3); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+        }
+
+        .rotate-scale-up-hor, .display {
+            -webkit-animation: rotate-scale-up-hor 0.65s linear both;
+                    animation: rotate-scale-up-hor 0.65s linear both;
+        }   
+     
+        @-webkit-keyframes rotate-scale-up-hor {
+        0% {
+            -webkit-transform: scale(1) rotateX(0);
+                    transform: scale(1) rotateX(0);
+        }
+        50% {
+            -webkit-transform: scale(2) rotateX(-180deg);
+                    transform: scale(2) rotateX(-180deg);
+        }
+        100% {
+            -webkit-transform: scale(1) rotateX(-360deg);
+                    transform: scale(1) rotateX(-360deg);
+        }
+        }
+        @keyframes rotate-scale-up-hor {
+        0% {
+            -webkit-transform: scale(1) rotateX(0);
+                    transform: scale(1) rotateX(0);
+        }
+        50% {
+            -webkit-transform: scale(2) rotateX(-180deg);
+                    transform: scale(2) rotateX(-180deg);
+        }
+        100% {
+            -webkit-transform: scale(1) rotateX(-360deg);
+                    transform: scale(1) rotateX(-360deg);
+        }
+        }
+
+        .display{
+            font-size: 3em;
+            text-align:left;
+        }
+        .item-done{
+            visibility: hidden;
+        }
+        #start, #restart{
+            color: blanchedalmond;
+            background-image: linear-gradient(to right, #24C6DC 0%, #514A9D 51%, #24C6DC 100%);
+            background-position: right center; 
+        }
+        .counter{
+            margin-top: -60px;
+        }
+
+        .tilt-in-top-1, #start, #restart {
+	        -webkit-animation: tilt-in-top-1 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+	        animation: tilt-in-top-1 0.6s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+        }
+        @-webkit-keyframes tilt-in-top-1 {
+        0% {
+            -webkit-transform: rotateY(30deg) translateY(-300px) skewY(-30deg);
+                    transform: rotateY(30deg) translateY(-300px) skewY(-30deg);
+            opacity: 0;
+        }
+        100% {
+            -webkit-transform: rotateY(0deg) translateY(0) skewY(0deg);
+                    transform: rotateY(0deg) translateY(0) skewY(0deg);
+            opacity: 1;
+        }
+        }
+        @keyframes tilt-in-top-1 {
+        0% {
+            -webkit-transform: rotateY(30deg) translateY(-300px) skewY(-30deg);
+                    transform: rotateY(30deg) translateY(-300px) skewY(-30deg);
+            opacity: 0;
+        }
+        100% {
+            -webkit-transform: rotateY(0deg) translateY(0) skewY(0deg);
+                    transform: rotateY(0deg) translateY(0) skewY(0deg);
+            opacity: 1;
+        }
+        }
+
+        .swing-out-top-bck, .counter {
+            -webkit-animation: swing-out-top-bck 0.45s cubic-bezier(0.600, -0.280, 0.735, 0.045) both;
+            animation: swing-out-top-bck 1.15s cubic-bezier(0.600, -0.280, 0.735, 0.045) both;
+        }
+              
+        @-webkit-keyframes swing-out-top-bck {
+        0% {
+            -webkit-transform: rotateX(0deg);
+                    transform: rotateX(0deg);
+            -webkit-transform-origin: top;
+                    transform-origin: top;
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: rotateX(-100deg);
+                    transform: rotateX(-100deg);
+            -webkit-transform-origin: top;
+                    transform-origin: top;
+            opacity: 0;
+        }
+        }
+        @keyframes swing-out-top-bck {
+        0% {
+            -webkit-transform: rotateX(0deg);
+                    transform: rotateX(0deg);
+            -webkit-transform-origin: top;
+                    transform-origin: top;
+            opacity: 1;
+        }
+        100% {
+            -webkit-transform: rotateX(-100deg);
+                    transform: rotateX(-100deg);
+            -webkit-transform-origin: top;
+                    transform-origin: top;
+            opacity: 0;
+        }
+        }
+
+        #b1,#b2,#b3 {background-image: linear-gradient(to right, #E55D87 0%, #5FC3E4 51%, #E55D87 100%)}
+        #b4,#b5,#b6 {background-image: linear-gradient(to right, #ED4264 0%, #FFEDBC 51%, #ED4264 100%)}
+        #b7,#b8,#b9 {background-image: linear-gradient(to right, #43cea2 0%, #185a9d 51%, #43cea2 100%)}
+        #b10,#b11,#b12 {background-image: linear-gradient(to right, #FF512F 0%, #F09819 51%, #FF512F 100%)}
+        #b13,#b14,#b15 {background-image: linear-gradient(to right, #f79d00 0%, #64f38c 51%, #f79d00 100%)}
+
+    </style>
+</head>
+<body>
+    <h1>MEMORY GAME</h1>
+    <div id='row1'>
+        <button id='b1' class='btn'>🔨</button>
+        <button id='b2' class='btn'>🔨</button>
+        <button id='b3' class='btn'>🔨</button>
+    </div>
+    <div id='row2'>
+        <button id='b4' class='btn'>🔨</button>
+        <button id='b5' class='btn'>🔨</button>
+        <button id='b6' class='btn'>🔨</button>
+    </div>
+    <div id='row3'>
+        <button id='b7' class='btn'>🔨</button>
+        <button id='b8' class='btn'>🔨</button>
+        <button id='b9' class='btn'>🔨</button>
+    </div>
+    <div id='row4'>
+        <button id='b10' class='btn'>🔨</button>
+        <button id='b11' class='btn'>🔨</button>
+        <button id='b12' class='btn'>🔨</button>
+    </div>
+    <div id='row5'>
+        <button id='b13' class='btn'>🔨</button>
+        <button id='b14' class='btn'>🔨</button>
+        <button id='b15' class='btn'>🔨</button>
+    </div>
+    <div id='row6'>
+        <button id='b16' class='btn'>🔨</button>
+        <button id='b17' class='btn'>🔨</button>
+        <button id='b18' class='btn'>🔨</button>
+    </div>
+    <div>
+        <button id='start'>TAP TO PLAY</button>
+    </div>
+
+    <script src='app.js'></script>
+</body>
+</html>
